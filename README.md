@@ -43,7 +43,7 @@ If your custom smart contract requires third party libraries, then you would nee
 
 #### At this point, zip your calculator with this files included only.
 
-![Custom smart contract](https://github.com/dragonchain-inc/custom-smart-contract-python-sdk/blob/master/assets/py.png)
+![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
 ```
 calculator.py calculatorService.py
 ```
