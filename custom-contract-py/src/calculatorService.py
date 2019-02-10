@@ -13,5 +13,4 @@ class CalculatorService:
         # The value here will be stored on the blockchain
         return (int(param['numOne']) * int(param['numTwo']))
 
-
 calculatorService = CalculatorService()

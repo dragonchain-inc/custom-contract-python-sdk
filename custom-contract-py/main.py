@@ -3,12 +3,9 @@
     Dragonchain custom smart contract
 
 """
-import os
-# from calculatorService 
-calculatorService = os.path.abspath(os.path.dirname("calculatorService"))
+# These actions can be taken out and put in a separate file.
 
-
-# Entry point
+from src.calculatorService import calculatorService
 
 
 def main(event, context):
@@ -60,7 +57,7 @@ payload = {
     "payload": {
         "method": "multiplication",
         "parameters": {
-            "numOne": 3,
+            "numOne": 10,
             "numTwo": 3
         }
     }
