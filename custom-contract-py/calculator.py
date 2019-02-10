@@ -5,10 +5,26 @@
 """
 # These actions can be taken out and put in a separate file.
 
+
+import json
+import os
+import time
+import datetime
+import dragonchain_sdk
 from src.calculatorService import calculatorService
 
 
 def main(event, context):
+
+    # You can use Dragonchain sdk within your smart contract to perfrom advance operations.
+    # This is how you can leverage dragonchain's smart contract.
+    #-----------------------------------------------------------------------------------
+    # api = os.environ['API_KEY']
+    # sc_name = os.environ['SMART_CONTRACT_NAME']
+    # auth_key = os.environ['AUTH_KEY']
+    # auth_id = os.environ['AUTH_KEY_ID']
+    # dcid = os.environ['DRAGONCHAIN_ID']
+    
     # Event will have a paylaod.
     print("New payload: ")
     print(event['payload'])
