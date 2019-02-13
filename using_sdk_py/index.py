@@ -38,27 +38,12 @@ payload = {
 
 try:
     # Uncomment one after another
-    # post_custom_contract = dragonchain_client.post_custom_contract(name, code, handler runtime,sc_type, True)
+    # post_custom_contract = dragonchain_client.post_custom_contract(name, code, runtime, handlersc_type, True)
     # print(json.dumps(post_custom_contract,indent=4, sort_keys=True))
-    post_transaction = dragonchain_client.post_transaction(txn_type,payload)
-    print(json.dumps(post_transaction,indent=4, sort_keys=True))
-    # query_transactions = dragonchain_client.query_transactions('invoker:"1222f388-a955-4d32-a3af-002ee015b790"')
+    # post_transaction = dragonchain_client.post_transaction(txn_type,payload)
+    # print(json.dumps(post_transaction,indent=4, sort_keys=True))
+    # query_transactions = dragonchain_client.query_transactions('invoker:"1222f388-a9, 55-4d32-a3af-002ee015b790"')
     # heap = dragonchain_client.get_sc_heap(str(txn_type), str("05fd9656-f04b-4359-8847-2d17415d10d5"))
     # print(json.dumps(heap,indent=4, sort_keys=True))
-    # data = dragonchain_client.get_sc_heap("mainTest", "Values")
-    # data = dragonchain_client.list_sc_heap("mainTest")
-
 except TypeError as e:
     print({'error': str(e)})
-
-
-
-# Issues: When I submit smart contract and specify it's handler function it works through the console. 
-# But when I upload the smart contract through the SDK nothing happens.
-
-# I think setting the handler by default and mot allowing the SDK set the handler is causing the issue. The node SDK works fine when I pass the hanler. 
-
-
-
-
-

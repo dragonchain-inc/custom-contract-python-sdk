@@ -3,6 +3,7 @@
     Dragonchain custom smart contract
 
 """
+
 # These actions can be taken out and put in a separate file.
 # You can use Dragonchain sdk within your smart contract to perfrom advance operations.
 # This is how you can leverage dragonchain's smart contract.
@@ -21,12 +22,10 @@
 # dcid = os.environ['DRAGONCHAIN_ID']
 
 # Event will have a paylaod.
-
 from src.calculatorService import calculatorService
 
 # Main entry
 def main(event, context):
-    print("New payload: ")
     print(event['payload'])
     try:
         payload = event['payload']
@@ -62,13 +61,11 @@ def main(event, context):
                 },
                 "Ans": calculatorService.multiplication(parameters)
             }
-
     except TypeError as e:
         return {'error': str(e)}
 
 
-#   For test only
-#
+# For test only
 # payload = {
 #     "version": "1",
 #     "txn_type": "calculator",
