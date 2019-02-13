@@ -4,31 +4,30 @@
 
 """
 # These actions can be taken out and put in a separate file.
+# You can use Dragonchain sdk within your smart contract to perfrom advance operations.
+# This is how you can leverage dragonchain's smart contract.
+#-----------------------------------------------------------------------------------
 
+#import json
+#import os
+#import time
+#import datetime
+#import dragonchain_sdk
 
-import json
-import os
-import time
-import datetime
-import dragonchain_sdk
+# api = os.environ['API_KEY']
+# sc_name = os.environ['SMART_CONTRACT_NAME']
+# auth_key = os.environ['AUTH_KEY']
+# auth_id = os.environ['AUTH_KEY_ID']
+# dcid = os.environ['DRAGONCHAIN_ID']
+
+# Event will have a paylaod.
+
 from src.calculatorService import calculatorService
 
-
+# Main entry
 def main(event, context):
-
-    # You can use Dragonchain sdk within your smart contract to perfrom advance operations.
-    # This is how you can leverage dragonchain's smart contract.
-    #-----------------------------------------------------------------------------------
-    # api = os.environ['API_KEY']
-    # sc_name = os.environ['SMART_CONTRACT_NAME']
-    # auth_key = os.environ['AUTH_KEY']
-    # auth_id = os.environ['AUTH_KEY_ID']
-    # dcid = os.environ['DRAGONCHAIN_ID']
-    
-    # Event will have a paylaod.
     print("New payload: ")
     print(event['payload'])
-
     try:
         payload = event['payload']
         method = payload['method']
@@ -67,17 +66,19 @@ def main(event, context):
     except TypeError as e:
         return {'error': str(e)}
 
-payload = {
-    "version": "1",
-    "txn_type": "calculator",
-    "payload": {
-        "method": "multiplication",
-        "parameters": {
-            "numOne": 10,
-            "numTwo": 3
-        }
-    }
-}
 
-result = main(payload, "")
-print(result)
+#   For test only
+#
+# payload = {
+#     "version": "1",
+#     "txn_type": "calculator",
+#     "payload": {
+#         "method": "multiplication",
+#         "parameters": {
+#             "numOne": 10,
+#             "numTwo": 3
+#         }
+#     }
+# }
+# result = main(payload, "")
+# print(result)
