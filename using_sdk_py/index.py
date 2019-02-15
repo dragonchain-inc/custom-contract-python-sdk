@@ -25,7 +25,7 @@ dragonchain_client = dragonchain_sdk.client(
 # handler = "calculator2.main"
 # runtime = "python3.6"
 
-txn_type = "calculator2"
+txn_type = "main"
 name = txn_type
 sc_type = "transaction"
 payload = {
@@ -42,6 +42,7 @@ try:
     # post_custom_contract = dragonchain_client.post_custom_contract(name, code, runtime, handlersc_type, True)
     # print(json.dumps(post_custom_contract,indent=4, sort_keys=True))
     # post_transaction = dragonchain_client.post_transaction(txn_type,payload)
+    # dragonchain_client.c
     # print(json.dumps(post_transaction,indent=4, sort_keys=True))
     # query_transactions = dragonchain_client.query_transactions('invoker:"1222f388-a9, 55-4d32-a3af-002ee015b790"')
     # heap = dragonchain_client.get_sc_heap("sc_name", str("Ans"))
