@@ -180,6 +180,10 @@ If you take a look at the calculator smart contract, you will notice that we are
 Keys: Values and Ans
 ```py
 
+# Get single data from the heap
 heap = dragonchain_client.get_sc_heap("sc_name", str("Ans")) # returns the answer value
 
 ```
+
+Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk. 
+### More projects to come...
