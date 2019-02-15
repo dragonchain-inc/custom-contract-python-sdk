@@ -159,3 +159,27 @@ try:
 except TypeError as e:
     print({'error': str(e)})
 ```
+
+#### How do you access your data in the blockchain?
+> Dragonchain blockchain uses heap which stores data to the blockchain. 
+
+>What is a heap? A heap is a chain storage value where your smart contract state/data stored on the chain. Heap takes a (key, value). You can use the key to get data you stored on your blockchain. 
+If you take a look at the calculator smart contract, you will notice that we are returning key value state/data. Example in the code:
+```py
+
+"Values": {
+    "numOne": parameters['numOne'],
+    "numTwo": parameters['numTwo']
+},
+"Ans": calculatorService.addition(parameters)
+}
+```
+
+
+> The above key value is stored in the blockchain. To access the data, you do the following.
+Keys: Values and Ans
+```py
+
+heap = dragonchain_client.get_sc_heap("sc_name", str("Ans")) # returns the answer value
+
+```
