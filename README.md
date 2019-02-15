@@ -21,7 +21,7 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 → cd custom-contract-py
 → ls 
 
-calculator2.py calculator2Service.py
+calculator2.py src
 ```
 
 
@@ -45,7 +45,7 @@ If your custom smart contract requires third party libraries, then you would nee
 
 ![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
 ```
-calculator2.py calculator2Service.py
+calculator2.py src/calculator2Service.py
 ```
 
 
