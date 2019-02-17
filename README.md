@@ -5,6 +5,9 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 
 > [Python SDK](https://pypi.org/project/dragonchain-sdk/)
 
+### System requirements
+* Must have python3 installed on the system
+* Must have pip3 to download the dragonchain-sdk
 
 ## How to test each custom smart contract locally
 #### First clone the code
@@ -15,79 +18,94 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 ```
 
 #### Using the Python Dragonchain Smart Contract
-> To be able to run your javascript code, please make sure you are inside your javascript directory.
+> To be able to run your python code, please make sure you are inside your custom-contract directory.
+Remember to uncomment the code below:
+
+```py
+# For test only
+# payload = {
+#     "version": "1",
+#     "txn_type": "calculator",
+#     "payload": {
+#         "method": "multiplication",
+#         "parameters": {
+#             "numOne": 10,
+#             "numTwo": 3
+#         }
+#     }
+# }
+# result = main(payload, "")
+# print(result)
+```
 
 ```bash
 → cd custom-contract-py
-→ ls 
-
-calculator2.py src
 ```
 
+> Then run it like:
 
-> In order to start building custom contract with third party libraries, you must run 
-
-#### To test this example, run the following:
-```bash
-→ python3 calculator2.py
+```py
+→ python3 calculator.py
 
 New payload:
 {'method': 'multiplication', 'parameters': {'numOne': 3, 'numTwo': 3}}
 {'Values': {'numOne': 3, 'numTwo': 3}, 'Ans': 9}
 ```
 
-If your custom smart contract requires third party libraries, then you would need to add them in the root directy of the your custom smart contract.
+If your custom smart contract requires third party libraries, then you would need to add them in the root directy of your custom smart contract.
 
 #### Note: For custom Contract with additional dependencies [read about AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
 
 
-#### At this point, zip your calculator2 with this files included only.
+#### At this point, zip your calculator with this files included only.
 
 ![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
-```
-calculator2.py src/calculator2Service.py
-```
 
 
-#### Change the values your key's values.
-
-```py
-DC_ID_ONE = 'DRAGONCHAIN_ID_HERE'
-AUTH_KEY_ID = 'PUT_IT_HERE'
-AUTH_KEY = 'PUT_IT_HERE'
-```
-
-#### Before posting the calculator2 custom smart contract, make sure that you have your calculator2.zip ready to upload. Your code should be under using_sdk_py root or reference it from anywhere.
-
-It should look similar to this example.
+#### Change the values of the right values with real values to work
 
 ```py
 import json
 import dragonchain_sdk
+import base64
 
+DC_ID_ONE = 'DRAGONCHAIN_ID_HERE'
+AUTH_KEY_ID = 'PUT_IT_HERE'
+AUTH_KEY = 'PUT_IT_HERE'
+
+# Setting a logger
+dragonchain_sdk.set_stream_logger('dragonchain_sdk')
+
+# client with your id.
 dragonchain_client = dragonchain_sdk.client(dragonchain_id=DC_ID_ONE)
-# Grab the file to upload
-datafile = open('calculator2Python.zip', 'rb') 
+dragonchain_client.override_credentials(AUTH_KEY, AUTH_KEY_ID)
+
+# This zip file should be in the same directory
+datafile = open('calculator.zip', 'rb')
+
 # Convert the file to base64
-code = base64.b64encode(datafile.read()).decode('utf8')
+code = base64.b64encode(datafile.read()).decode("utf8")
 
 ```
+
+#### Before posting the calculator custom smart contract, make sure that you have your calculator.zip ready for upload. Your code should be under using_sdk_py root or reference it from anywhere
 
 #### Here is the payload to pass to the Dragonchain ```post_custom_contract```
 
 ```py
-name = "calculator2"
-code = "base64"
-runtime = "python3.6"
-sc_type = "transaction"
-serial = True
-handler = "handler.main"
+# Payload data
+tag = 'calculator'
+handler = 'calculator.main'
+runtime = 'python3.6'
+txn_type = 'main'
+name = txn_type
+sc_type = 'transaction'
 
-
-post_custom_contract = dragonchain_client.post_custom_contract(name, code, runtime, sc_type, serial)
+post_custom_contract = dragonchain_client.post_custom_contract(name, code, runtime, handler, sc_type, True)
+print(json.dumps(post_custom_contract, indent=4, sort_keys=True))
 ```
 
-#### To use the Python SDK to post the calculator2 contract, run this command
+#### To use the Python SDK to post the custom calculator contract, run this command
 
 ```bash
 $ python3 index.py
@@ -100,40 +118,14 @@ $ python3 index.py
 }
 ```
 
-#### Congratulations! :boom: :dragon:  You are one step away from posting your first transaction to your calculator2 smart contract
-
-#### Here is how to post transction to your calulator
-Before posting your transcation, comment out the     
+#### Here is how to post transction to your calculator
 ```py
 
+# Post new transaction. Remember to comment out register_transaction_type code.
+# Copy the returned transaction_id and paste to the function below
+post_transaction = dragonchain_client.post_transaction(txn_type, payload)
+print(json.dumps(post_transaction, indent=4, sort_keys=True))
 
-try:
-    # post_custom_contract = dragonchain_client.post_custom_contract(name, code, handler runtime,sc_type, True)
-    # print(json.dumps(post_custom_contract,indent=4, sort_keys=True))
-
-except TypeError as e:
-    print({'error': str(e)})
-```
-
-Then run this command.
-```py
-
-txn_type = "calculator2"
-tag = "calculator2"
-
-payload = {
-    "method": "multiplication",
-    "parameters": {
-        "numOne": 3,
-        "numTwo": 3
-    }
-}
-
-try:
-    post_transaction = dragonchain_client.post_transaction(txn_type,payload,tag)
-    print(json.dumps(post_transaction,indent=4, sort_keys=True))
-except TypeError as e:
-    print({'error': str(e)})
 ```
 
 ```bash
@@ -184,6 +176,22 @@ Keys: Values and Ans
 heap = dragonchain_client.get_sc_heap("sc_name", str("Ans")) # returns the answer value
 
 ```
+### How to register a Transaction
 
+```py
+# Register a transaction if you would like to just post transactions. Comment out post_custom_contract code
+# Custom indexes can be used to query the transaction.
+register_transaction = dragonchain_client.register_transaction_type('Your_Transaction_Name', custom_indexes=[{
+    'key': 'Unknown',
+    'path': ''
+}])
+```
+
+
+#### Post to your new Transaction.
+
+```py
+post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload={"I am awesome"})
+print(json.dumps(post_transaction, indent=4, sort_keys=True))
+```
 Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk. 
-### More projects to come...
