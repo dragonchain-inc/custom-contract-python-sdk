@@ -194,4 +194,4 @@ register_transaction = dragonchain_client.register_transaction_type('Your_Transa
 post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload={"I am awesome"})
 print(json.dumps(post_transaction, indent=4, sort_keys=True))
 ```
-Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk. 
+## Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk. 
