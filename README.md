@@ -8,6 +8,7 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 ### System requirements
 * Must have python3 installed on the system
 * Must have pip3 to download the dragonchain-sdk
+* Have an ide/editor like vscode from Microsoft to use or any editor you are comfortable with.
 
 ## How to test each custom smart contract locally
 #### First clone the code
