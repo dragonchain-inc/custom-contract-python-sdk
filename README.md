@@ -1,16 +1,33 @@
-## Welcome to the Dragonchain code sample repository
+# Welcome
 
-> These code samples are an example of Dragonchain custom smart contract. You will be deploying a calculator2 smart contract and post some transactions.
+This tutorial is designed for those looking to build blockchain solution on Dragonchain platform. This tutorial includes writing a calculator smart contract and how to use Dragonchain Python SDK.
+
+### Target audience 
+
+Developers developers developers
+
+### This short tutorial aims to answer the following
+
+* System requirements
+* Test smart contract locally
+* Structure of smart contact
+* Authentication requirements
+* How to post smart contract
+* How to post transaction
+* How to query current transaction 
+* How to register a transaction 
+
+### System requirements
+
 There are currently two SDKs with more to come that can communicate with Dragonchain platform. Please go check out our SDKs for more information in the links below.
 
 > [Python SDK](https://pypi.org/project/dragonchain-sdk/)
 
-### System requirements
 * Must have python3 installed on the system
 * Must have pip3 to download the dragonchain-sdk
 * Have an ide/editor like vscode from Microsoft to use or any editor you are comfortable with.
 
-## How to test each custom smart contract locally
+### Test smart contract locally
 #### First clone the code
 
 ```bash
@@ -55,22 +72,25 @@ New payload:
 
 If your custom smart contract requires third party libraries, then you would need to add them in the root directy of your custom smart contract.
 
-#### Note: For custom Contract with additional dependencies [read about AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
+##### Note: For custom Contract with additional dependencies [read about AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
 
 
-#### At this point, zip your calculator with this files included only.
+#### Structure of smart contact
 
 ![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
 
-
-#### Change the values of the right values with real values to work
+#### Authentication requirements
+Change the right values with real values from Dragochain console. 
+* Click view chains and copy "ChainId"
+* Locate "Generate New API Key": You will be given to two keys.
+* Copy and paste the your keys below:
 
 ```py
 import json
 import dragonchain_sdk
 import base64
 
-DC_ID_ONE = 'DRAGONCHAIN_ID_HERE'
+CHAIN_ID_ONE = 'CHAIN_ID_HERE'
 AUTH_KEY_ID = 'PUT_IT_HERE'
 AUTH_KEY = 'PUT_IT_HERE'
 
@@ -89,9 +109,10 @@ code = base64.b64encode(datafile.read()).decode("utf8")
 
 ```
 
-#### Before posting the calculator custom smart contract, make sure that you have your calculator.zip ready for upload. Your code should be under using_sdk_py root or reference it from anywhere
+Before posting the calculator custom smart contract, make sure that you have your calculator.zip ready for upload. Your code should be under using_sdk_py root or reference it from anywhere
 
-#### Here is the payload to pass to the Dragonchain ```post_custom_contract```
+### How to post smart contract
+Here is the payload to pass to the Dragonchain ```post_custom_contract```
 
 ```py
 # Payload data
@@ -119,9 +140,10 @@ $ python3 index.py
 }
 ```
 
-#### Here is how to post transction to your calculator
+### How to post transaction
+Here is how to post transction to your calculator
 ```py
-txn_type = 'calculator
+txn_type = 'calculator'
 payload = {
     "method": "multiplication", 
     "parameters": {
@@ -150,8 +172,9 @@ $ python3 index.py
 }
 ```
 
+### How to query current transaction 
 
-#### You can verify your transaction by calling the
+You can verify your transaction by calling query_transaction function
 
 ```py
 
@@ -198,10 +221,10 @@ register_transaction = dragonchain_client.register_transaction_type('Your_Transa
 ```
 
 
-#### Post to your new Transaction.
+### Post to your new Transaction
 
 ```py
-post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload={"I am awesome"})
+post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload="I am awesome")
 print(json.dumps(post_transaction, indent=4, sort_keys=True))
 ```
 ## Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk. 
