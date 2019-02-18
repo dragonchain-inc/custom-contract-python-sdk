@@ -121,6 +121,15 @@ $ python3 index.py
 
 #### Here is how to post transction to your calculator
 ```py
+txn_type = 'calculator
+payload = {
+    "method": "multiplication", 
+    "parameters": {
+        "numOne": 200, 
+        "numTwo": 6
+        }
+    }
+}
 
 # Post new transaction. Remember to comment out register_transaction_type code.
 # Copy the returned transaction_id and paste to the function below
