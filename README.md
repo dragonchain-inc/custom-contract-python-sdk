@@ -1,6 +1,6 @@
 # Welcome
 
-This tutorial is designed for those looking to build blockchain solution on Dragonchain platform. It includes writing a calculator smart contract and to use Dragonchain Python SDK.
+This tutorial is designed for those looking to build blockchain solution on Dragonchain platform. It includes writing a calculator smart contract and how to use Dragonchain Python SDK.
 
 ### Target audience 
 
