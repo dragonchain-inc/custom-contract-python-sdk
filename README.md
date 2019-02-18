@@ -12,8 +12,8 @@ Developers developers developers
 * Test smart contract locally
 * Structure of smart contact
 * Authentication requirements
-* How to post smart contract
-* How to post transaction
+* How to post a smart contract
+* How to post a transaction
 * How to query current transaction 
 * How to register a transaction 
 
@@ -25,7 +25,7 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 
 * Must have python3 installed on the system
 * Must have pip3 to download the dragonchain-sdk
-* Have an ide/editor like vscode from Microsoft to use or any editor you are comfortable with.
+* Have an Ide/editor like vscode from Microsoft to use or any editor you are comfortable with.
 
 ### Test smart contract locally
 #### First clone the code
@@ -75,12 +75,11 @@ If your custom smart contract requires third party libraries, then you would nee
 ##### Note: For custom Contract with additional dependencies [read about AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
 
 
-#### Structure of smart contact
+### Structure of smart contact
 
 ![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
 
-#### Authentication requirements
-Change the right values with real values from Dragochain console. 
+### Authentication requirements
 * Click view chains and copy "ChainId"
 * Locate "Generate New API Key": You will be given to two keys.
 * Copy and paste the your keys below:
@@ -185,7 +184,7 @@ except TypeError as e:
     print({'error': str(e)})
 ```
 
-#### How do you access your data in the blockchain?
+####Heap
 > Dragonchain blockchain uses heap which stores data to the blockchain. 
 
 >What is a heap? A heap is a chain storage value where your smart contract state/data stored on the chain. Heap takes a (key, value). You can use the key to get data you stored on your blockchain. 
