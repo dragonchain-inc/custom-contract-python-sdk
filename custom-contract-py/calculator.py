@@ -1,12 +1,12 @@
 """
     Dragonchain-inc
-    Dragonchain custom smart contract
+    Dragonchain custom smart contract in Python
 
 """
 
 # These actions can be taken out and put in a separate file.
-# You can use Dragonchain sdk within your smart contract to perfrom advance operations.
-# This is how you can leverage dragonchain's smart contract.
+# You can use Dragonchain sdk within your smart contract to perfrom advanced operations.
+# This is how you can leverage Dragonchain's smart contract capabilities
 #-----------------------------------------------------------------------------------
 
 #import json
@@ -22,9 +22,12 @@
 # dcid = os.environ['DRAGONCHAIN_ID']
 
 # Event will have a paylaod.
+
 from src.calculatorService import calculatorService
 
 # Main entry
+
+
 def main(event, context):
     print(event['payload'])
     try:
@@ -40,7 +43,7 @@ def main(event, context):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "Ans": calculatorService.addition(parameters)
+                "addition": calculatorService.addition(parameters)
             }
 
         if method == "subtraction":
@@ -50,7 +53,7 @@ def main(event, context):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "Ans": calculatorService.subtraction(parameters)}
+                "subtraction": calculatorService.subtraction(parameters)}
 
         if method == "multiplication":
             # The blockchain expects a json data or response error
@@ -59,23 +62,30 @@ def main(event, context):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "Ans": calculatorService.multiplication(parameters)
+
+                "multiplication": calculatorService.multiplication(parameters)
             }
     except TypeError as e:
         return {'error': str(e)}
 
 
-# For test only
-# payload = {
-#     "version": "1",
-#     "txn_type": "calculator",
-#     "payload": {
-#         "method": "multiplication",
-#         "parameters": {
-#             "numOne": 10,
-#             "numTwo": 3
-#         }
-#     }
-# }
-# result = main(payload, "")
-# print(result)
+''' 
+  For test only
+'''
+
+'''
+payload = {
+    "version": "1",
+    "txn_type": "calculator",
+    "payload": {
+        "method": "multiplication",
+        "parameters": {
+            "numOne": 10,
+            "numTwo": 3
+        }
+    }
+}
+result = main(payload, "")
+print(result)
+
+'''
