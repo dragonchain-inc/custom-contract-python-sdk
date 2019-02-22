@@ -203,7 +203,7 @@ If you take a look at the calculator smart contract, you will notice that we are
     "numOne": parameters['numOne'],
     "numTwo": parameters['numTwo']
 },
-"Ans": calculatorService.addition(parameters)
+"multiplication": calculatorService.addition(parameters)
 }
 ```
 
@@ -213,7 +213,7 @@ Keys: Values and Ans
 ```py
 
 # Get single data from the heap
-heap = dragonchain_client.get_sc_heap("sc_name", str("Ans")) # returns the answer value
+heap = dragonchain_client.get_sc_heap("sc_name", str("multiplication")) # returns the answer value
 
 ```
 
@@ -231,7 +231,7 @@ register_transaction = dragonchain_client.register_transaction_type('Your_Transa
 ### Post to your new Transaction
 
 ```py
-post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload="I am awesome")
+post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload='I am awesome')
 print(json.dumps(post_transaction, indent=4, sort_keys=True))
 ```
 
