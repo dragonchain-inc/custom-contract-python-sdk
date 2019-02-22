@@ -1,9 +1,13 @@
 # Welcome to building on Dragonchain Platform
 
 This tutorial is designed for those looking to build blockchain solution on Dragonchain platform. It includes writing a calculator smart contract and how to use Dragonchain Python SDK.
+
 # Attention:
 
-> ## The Dragonchain Platform is implementing improvements that will allow developers to write smart contracts in a variety of programming languages using Docker images.
+> ## Improvements
+> * ### The Dragonchain Platform is implementing improvements that will allow developers to write smart contracts in a variety of programming languages using Docker images.
+> * ### Dragonchain will be releasing a FREE Lab (Sandbox) to develop and test smart contracts.
+
 
 ## Target audience
 
