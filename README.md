@@ -15,7 +15,7 @@ Developers developers developers
 
 ### This short tutorial aims to answer the following
 
-* How to create your L1 Node
+* Create L1 Node
 * System requirements
 * Test smart contract locally
 * Structure of smart contact
@@ -25,7 +25,7 @@ Developers developers developers
 * How to query current transaction 
 * How to register a transaction 
 
-### How to create your L1 Node
+### Create L1 Node
 > Create an account on Dragonchain and you will see this screen. If you don't see it, click home on the left side bar.
 
 
