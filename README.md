@@ -5,8 +5,8 @@ This tutorial is designed for those looking to build blockchain solution on Drag
 # Attention:
 
 > ## Improvements
-> * ### The Dragonchain Platform is implementing improvements that will allow developers to write smart contracts in a variety of programming languages using Docker images.
-> * ### Dragonchain will be releasing a FREE Lab (Sandbox) to develop and test smart contracts.
+> * #### The Dragonchain Platform is implementing improvements that will allow developers to write smart contracts in a variety of programming languages using Docker images.
+> * #### Dragonchain will be releasing a FREE Lab (Sandbox) to develop and test smart contracts.
 
 
 ## Target audience
@@ -15,6 +15,7 @@ Developers developers developers
 
 ### This short tutorial aims to answer the following
 
+* How to create your L1 Node
 * System requirements
 * Test smart contract locally
 * Structure of smart contact
@@ -23,6 +24,31 @@ Developers developers developers
 * How to post a transaction
 * How to query current transaction 
 * How to register a transaction 
+
+### How to create your L1 Node
+> Create an account on Dragonchain and you will see this screen. If you don't see it, click home on the left side bar.
+
+
+![View of your chains](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/beforeYouStart.png)
+
+> Create an L1 Node. 
+
+![Create an L1 Node](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/createNewChain.png)
+
+
+> Configure your L1 Node.
+
+![Configure your L1 Node](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/yourConfig.png)
+
+> Copy your newly generated keys: ChainId, Auth_key and AuthKey_Id
+
+![ChainId, Auth_key and AuthKey_Id](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/doneCreating.png)
+
+
+
+
+
+
 
 ### System requirements
 
