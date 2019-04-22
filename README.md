@@ -1,58 +1,17 @@
-# Welcome to building on Dragonchain Platform
+# Calculator Smart Contract Example (Python)
 
-This tutorial is designed for those looking to build blockchain solution on Dragonchain platform. It includes writing a calculator smart contract and how to use Dragonchain Python SDK.
+## Overview
 
-# Attention:
+* [Requirements](#requirements)
+* [Authentication Requirements](#authentication-requirements)
+* [Create a Smart Contract](#create-a-smart-contract)
+* [Using Docker](#using-docker)
+* [Post a Smart Contract](#post-a-smart-contract)
+* [Post a Transaction](#post-a-transaction)
+* [Query a Transaction](#query-a-transaction)
+* [Heap](#heap)
 
-> ## Improvements
-> * #### The Dragonchain Platform is implementing improvements that will allow developers to write smart contracts in a variety of programming languages using Docker images.
-> * #### Dragonchain will be releasing a FREE Lab (Sandbox) to develop and test smart contracts.
-
-
-## Target audience
-
-Developers developers developers
-
-### This short tutorial aims to answer the following
-
-* Create L1 Node
-* System requirements
-* Test smart contract locally
-* Structure of smart contact
-* Authentication requirements
-* How to post a smart contract
-* How to post a transaction
-* How to query current transaction 
-* How to register a transaction 
-
-### Create L1 Node
-> Create an account on Dragonchain and you will see this screen. If you don't see it, click home on the left side bar.
-
-
-![View of your chains](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/beforeYouStart.png)
-
-> Create an L1 Node. 
-
-![Create an L1 Node](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/createNewChain.png)
-
-
-> Configure your L1 Node.
-
-![Configure your L1 Node](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/yourConfig.png)
-
-> Copy your newly generated keys: ChainId, Auth_key and AuthKey_Id
-
-![ChainId, Auth_key and AuthKey_Id](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/howTo/doneCreating.png)
-
-
-
-
-
-
-
-### System requirements
-
-There are currently two SDKs with more to come that can communicate with Dragonchain platform. Please go check out our SDKs for more information in the links below.
+### Requirements
 
 > [Python SDK](https://pypi.org/project/dragonchain-sdk/)
 
@@ -60,13 +19,13 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 * Must have pip3 to download the dragonchain-sdk
 * Have an Ide/editor like vscode from Microsoft to use or any editor you are comfortable with.
 
-### Test smart contract locally
+### Create a Smart Contract
 
-#### First clone the code
-
-```bash
-→ git clone <this_repo_link_here>
-→ cd <into_this_repo_you_cloned>
+```sh
+git clone https://github.com/dragonchain-inc/custom-contract-python-sdk/tree/master
+cd <project_name>
+cd custom-contract-py
+npm install
 ```
 
 #### Using the Python Dragonchain Smart Contract
@@ -75,44 +34,18 @@ There are currently two SDKs with more to come that can communicate with Dragonc
 → cd custom-contract-py
 ```
 
-Make sure you are inside your custom-contract-py directory and remember to uncomment the code below before executing this code:
+### Using Docker
 
-```py
-'''
-payload = {
-    "version": "1",
-    "txn_type": "calculator",
-    "payload": {
-        "method": "multiplication",
-        "parameters": {
-            "numOne": 10,
-            "numTwo": 3
-        }
-    }
-}
-result = main(payload, "")
-print(result)
-
-'''
+```sh
+docker build -t image_name.
+docker push image_name
 ```
 
-> Then run it like:
-
 ```py
-→ python3 calculator.py
-
 New payload:
 {'method': 'multiplication', 'parameters': {'numOne': 3, 'numTwo': 3}}
 {'Values': {'numOne': 3, 'numTwo': 3}, 'Ans': 9}
 ```
-
-If your custom smart contract requires third party libraries, then you would need to add them in the root directy of your custom smart contract.
-
-##### Note: For custom Contract with additional dependencies [read about AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html)
-
-### Structure of smart contact
-
-![Custom smart contract](https://github.com/dragonchain-inc/custom-contract-python-sdk/blob/master/assets/py.png)
 
 ### Authentication requirements
 
@@ -142,56 +75,36 @@ dragonchain_client.override_credentials(AUTH_KEY, AUTH_KEY_ID)
 
 Before posting the calculator custom smart contract, make sure that you have your calculator.zip ready for upload. Your code should be under using_sdk_py root or reference it from anywhere
 
-### How to post smart contract
-
-Here is the payload to pass to the Dragonchain ```post_custom_contract```
+### Post a Smart contract
 
 ```py
-# Payload data
-tag = 'calculator'
-handler = 'calculator.main'
-runtime = 'python3.6'
-txn_type = 'main'
-name = txn_type
-sc_type = 'transaction'
-
-post_custom_contract = dragonchain_client.post_custom_contract(name, code, runtime, handler, sc_type, True)
-print(json.dumps(post_custom_contract, indent=4, sort_keys=True))
+print(dragonchain_client.post_contract(
+    txn_type='image_name',
+    image='image_name',
+    cmd='python',
+    args=['-m', 'index'],
+    execution_order='parallel',
+    # auth='<docker_auth_token_if_private_repository>'
+))
 ```
 
-#### To use the Python SDK to post the custom calculator contract, run this command
 
-```bash
-$ python3 index.py
-{
-    "ok": true,
-    "response": {
-        "success": "Contract creation in progress."
-    },
-    "status": 201
-}
-```
-
-### How to post transaction
+### Post a Transaction
 
 Here is how to post transction to your calculator
 
 ```py
 
-txn_type = 'calculator'
-payload = {
-    "method": "multiplication", 
+print(dragonchain_client.post_transaction('example_contract', {
+    'version': '1',
+     "method": "multiplication", 
     "parameters": {
         "numOne": 200, 
         "numTwo": 6
         }
     }
-}
-
-# Post new transaction. Remember to comment out register_transaction_type code.
-# Copy the returned transaction_id and paste to the function below
-post_transaction = dragonchain_client.post_transaction(txn_type, payload)
-print(json.dumps(post_transaction, indent=4, sort_keys=True))
+    }
+}))
 
 ```
 
@@ -207,17 +120,12 @@ $ python3 index.py
 }
 ```
 
-### How to query current transaction 
+### Query a Transaction 
 
 You can verify your transaction by calling query_transaction function
 
 ```py
-
-try:
-    query_transactions = dragonchain_client.query_transactions('invoker:"5e1f1561-9a71-462e-b880-521899c10c24"')
-    print(json.dumps(query_transactions,indent=4, sort_keys=True))
-except TypeError as e:
-    print({'error': str(e)})
+print(dragonchain_client.query_transactions(query='your_transaction_id'))
 ```
 
 #### Heap
@@ -264,5 +172,3 @@ register_transaction = dragonchain_client.register_transaction_type('Your_Transa
 post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload='I am awesome')
 print(json.dumps(post_transaction, indent=4, sort_keys=True))
 ```
-
-## Congratulations! :boom: :dragon:  You have done it. Feel free to reach so we can improve our sdk 
