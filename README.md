@@ -68,8 +68,6 @@ response = dragonchain_client.post_contract(
 )
 ```
 
-### Post a Transaction
-
 ### Post a Smart contract
 
 ```py
