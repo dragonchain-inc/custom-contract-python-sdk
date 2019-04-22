@@ -103,8 +103,7 @@ print(dragonchain_client.post_transaction('example_contract', {
         "numTwo": 6
         }
     }
-    }
-}))
+))
 
 ```
 
@@ -160,15 +159,15 @@ heap = dragonchain_client.get_sc_heap("sc_name", str("multiplication")) # return
 ```py
 # Register a transaction if you would like to just post transactions. Comment out post_custom_contract code
 # Custom indexes can be used to query the transaction.
-register_transaction = dragonchain_client.register_transaction_type('Your_Transaction_Name', custom_indexes=[{
+print(dragonchain_client.register_transaction_type('Your_Transaction_Name', custom_indexes=[{
     'key': 'Unknown',
     'path': ''
-}])
+}]))
 ```
 
 ### Post to your new Transaction
 
 ```py
-post_transaction = dragonchain_client.post_transaction('Your_Transaction_Name', payload='I am awesome')
-print(json.dumps(post_transaction, indent=4, sort_keys=True))
+print(dragonchain_client.post_transaction('Your_Transaction_Name', payload='I am awesome'))
+
 ```
