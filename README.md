@@ -28,10 +28,13 @@ cd custom-contract-py
 npm install
 ```
 
-#### Using the Python Dragonchain Smart Contract
+### Creating a Smart Contract
 
 ```bash
+→ git clone <project_link>
+→ cd <project_name>
 → cd custom-contract-py
+→ pip3 install dragonchain-sdk
 ```
 
 ### Using Docker
@@ -54,26 +57,18 @@ New payload:
 * Copy and paste the your keys below:
 
 ```py
-'''
-    For this tutorial, you can paste your Dragonchain keys below.
-'''
-
-DC_ID_ONE = 'DRAGONCHAIN_ID_HERE'
-AUTH_KEY_ID = 'PUT_IT_HERE'
-AUTH_KEY = 'PUT_IT_HERE'
-dragonchain_client = dragonchain_sdk.client(dragonchain_id=DC_ID_ONE)
-dragonchain_client.override_credentials(AUTH_KEY, AUTH_KEY_ID)
-
-'''
-    This is another way to run this code if you wish to go a little advanced.
-    dragonchain_client = dragonchain_sdk.client()
-    The code above works only if you have a file ~/.dragonchain/credentials on your local computer. 
-    Check the README.md
-'''
-
+response = dragonchain_client.post_contract(
+    txn_type='calculator',
+    image='taban/calculator_contract:<latest>',
+    cmd='python',
+    args=['-m', 'main'],
+    execution_order='parallel',
+    # cron='* * * * *',
+    # auth='<docker_auth_token_if_private_repository>'
+)
 ```
 
-Before posting the calculator custom smart contract, make sure that you have your calculator.zip ready for upload. Your code should be under using_sdk_py root or reference it from anywhere
+### Post a Transaction
 
 ### Post a Smart contract
 
@@ -129,18 +124,17 @@ print(dragonchain_client.query_transactions(query='your_transaction_id'))
 
 #### Heap
 
-> Dragonchain blockchain uses heap which stores data to the blockchain. 
-
-> What is a heap? A heap is a chain storage value where your smart contract state/data stored on the chain. Heap takes a (key, value). You can use the key to get data you stored on your blockchain. 
+> Dragonchain blockchain uses heap which stores data to the blockchain
+What is a heap? A heap is a chain storage value where your smart contract state/data stored on the chain. Heap takes a (key, value). You can use the key to get data you stored on your blockchain. 
 If you take a look at the calculator smart contract, you will notice that we are returning key value state/data. Example in the code:
 
 ```py
-
-"Values": {
+{
+   "Values": {
     "numOne": parameters['numOne'],
     "numTwo": parameters['numTwo']
-},
-"multiplication": calculatorService.addition(parameters)
+    },
+   "multiplication": calculatorService.addition(parameters)
 }
 ```
 
@@ -148,7 +142,6 @@ If you take a look at the calculator smart contract, you will notice that we are
 Keys: Values and Ans
 
 ```py
-
 # Get single data from the heap
 heap = dragonchain_client.get_sc_heap("sc_name", str("multiplication")) # returns the answer value
 
