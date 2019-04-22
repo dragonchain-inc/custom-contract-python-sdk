@@ -1,37 +1,14 @@
 """
     Dragonchain-inc
     Dragonchain custom smart contract in Python
-
 """
 
-# These actions can be taken out and put in a separate file.
-# You can use Dragonchain sdk within your smart contract to perfrom advanced operations.
-# This is how you can leverage Dragonchain's smart contract capabilities
-#-----------------------------------------------------------------------------------
+import service
 
-#import json
-#import os
-#import time
-#import datetime
-#import dragonchain_sdk
-
-# api = os.environ['API_KEY']
-# sc_name = os.environ['SMART_CONTRACT_NAME']
-# auth_key = os.environ['AUTH_KEY']
-# auth_id = os.environ['AUTH_KEY_ID']
-# dcid = os.environ['DRAGONCHAIN_ID']
-
-# Event will have a paylaod.
-
-from src.calculatorService import calculatorService
-
-# Main entry
-
-
-def main(event, context):
-    print(event['payload'])
+def main(paylaod):
+    print(paylaod['payload'])
     try:
-        payload = event['payload']
+        payload = paylaod['payload']
         method = payload['method']
         parameters = payload['parameters']
 
@@ -43,7 +20,7 @@ def main(event, context):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "addition": calculatorService.addition(parameters)
+                "addition": service.addition(parameters)
             }
 
         if method == "subtraction":
@@ -53,7 +30,7 @@ def main(event, context):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "subtraction": calculatorService.subtraction(parameters)}
+                "subtraction": service.subtraction(parameters)}
 
         if method == "multiplication":
             # The blockchain expects a json data or response error
@@ -63,29 +40,7 @@ def main(event, context):
                     "numTwo": parameters['numTwo']
                 },
 
-                "multiplication": calculatorService.multiplication(parameters)
+                "multiplication": service.multiplication(parameters)
             }
     except TypeError as e:
         return {'error': str(e)}
-
-
-''' 
-  For test only
-'''
-
-'''
-payload = {
-    "version": "1",
-    "txn_type": "calculator",
-    "payload": {
-        "method": "multiplication",
-        "parameters": {
-            "numOne": 10,
-            "numTwo": 3
-        }
-    }
-}
-result = main(payload, "")
-print(result)
-
-'''
