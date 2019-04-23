@@ -91,7 +91,7 @@ Here is how to post transction to your calculator
 print(dragonchain_client.post_transaction('example_contract', {
     'version': '1',
      "method": "multiplication", 
-    "parameters": {
+     "parameters": {
         "numOne": 200, 
         "numTwo": 6
         }
