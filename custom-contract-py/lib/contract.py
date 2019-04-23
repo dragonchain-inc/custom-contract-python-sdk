@@ -2,23 +2,13 @@
     Dragonchain-inc
     Dragonchain custom smart contract in Python
 """
-
-def addition(param): # The value here will be stored on the blockchain
-    return (int(param['numOne']) + int(param['numTwo']))
-
-def subtraction(param):
-    # The value here will be stored on the blockchain
-    return (int(param['numOne']) - int(param['numTwo']))
-
-def multiplication(param):
-    # The value here will be stored on the blockchain
-    return (int(param['numOne']) * int(param['numTwo']))
+from calculator import addition, multiplication, subtraction
 
 
-def handler(paylaod):
-    print(paylaod['payload'])
+def handler(payload):
+    print(payload['method'])
+
     try:
-        payload = paylaod['payload']
         method = payload['method']
         parameters = payload['parameters']
 
