@@ -1,7 +1,6 @@
-  
 import sys
 import json
-from calculator import calculator
+from lib import contract
 
 
 def get_stdin():
@@ -16,6 +15,6 @@ def get_stdin():
 
 if __name__ == "__main__":
     st = get_stdin()
-    ret = calculator.main(st)
+    ret = contract.handler(st)
     if ret is not None:
         sys.stdout.write(json.dumps(ret))

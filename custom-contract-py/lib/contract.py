@@ -3,9 +3,19 @@
     Dragonchain custom smart contract in Python
 """
 
-import service
+def addition(param): # The value here will be stored on the blockchain
+    return (int(param['numOne']) + int(param['numTwo']))
 
-def main(paylaod):
+def subtraction(param):
+    # The value here will be stored on the blockchain
+    return (int(param['numOne']) - int(param['numTwo']))
+
+def multiplication(param):
+    # The value here will be stored on the blockchain
+    return (int(param['numOne']) * int(param['numTwo']))
+
+
+def handler(paylaod):
     print(paylaod['payload'])
     try:
         payload = paylaod['payload']
@@ -20,7 +30,7 @@ def main(paylaod):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "addition": service.addition(parameters)
+                "addition": addition(parameters)
             }
 
         if method == "subtraction":
@@ -30,7 +40,7 @@ def main(paylaod):
                     "numOne": parameters['numOne'],
                     "numTwo": parameters['numTwo']
                 },
-                "subtraction": service.subtraction(parameters)}
+                "subtraction": subtraction(parameters)}
 
         if method == "multiplication":
             # The blockchain expects a json data or response error
@@ -40,7 +50,7 @@ def main(paylaod):
                     "numTwo": parameters['numTwo']
                 },
 
-                "multiplication": service.multiplication(parameters)
+                "multiplication": multiplication(parameters)
             }
     except TypeError as e:
         return {'error': str(e)}
