@@ -46,7 +46,9 @@ docker push image_name
 
 ```py
 New payload:
-{'method': 'multiplication', 'parameters': {'numOne': 3, 'numTwo': 3}}
+{'method': 'multiplication', 'parameters': {'numOne': 200, 'numTwo': 9}}
+
+# Results
 {'Values': {'numOne': 3, 'numTwo': 3}, 'Ans': 9}
 ```
 
