@@ -6,11 +6,9 @@ def addition(param):
     # The value here will be stored on the blockchain
     return int(param["numOne"]) + int(param["numTwo"])
 
-
 def subtraction(param):
     # The value here will be stored on the blockchain
     return int(param["numOne"]) - int(param["numTwo"])
-
 
 def multiplication(param):
     # The value here will be stored on the blockchain
@@ -18,8 +16,6 @@ def multiplication(param):
 
 
 def handler(payload):
-    print(payload["method"])
-
     try:
         method = payload["method"]
         parameters = payload["parameters"]
@@ -28,31 +24,36 @@ def handler(payload):
         if method == "addition":
             # The blockchain expects a json data or response error
             return {
-                "Values": {
+                "Params": {
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "addition": addition(parameters),
+                "addition_ans": addition(parameters),
+                "tag": "addition"
+
             }
 
         if method == "subtraction":
             # The blockchain expects a json data or response error
             return {
-                "Values": {
+                "Params": {
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "subtraction": subtraction(parameters),
+                "subtraction_ans": subtraction(parameters),
+                "tag": "subtraction"
+
             }
 
         if method == "multiplication":
             # The blockchain expects a json data or response error
             return {
-                "Values": {
+                "Params": {
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "multiplication": multiplication(parameters),
+                "Ans": multiplication(parameters),
+                "tag": "multiplicaiton"
             }
     except TypeError as e:
         return {"error": str(e)}

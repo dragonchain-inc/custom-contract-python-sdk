@@ -15,14 +15,14 @@ def get_stdin():
     return buf
 
 
-def convert_type(param):
-    """ Convert paramters input int expected type """
-    if not (param is None):
-        return ast.literal_eval(param)
-
+def arg_as_dict(self):
+    v = ast.literal_eval(self)
+    if type(v) is not dict:
+        raise "Issues"
+    return v
 
 if __name__ == "__main__":
     st = get_stdin()
-    ret = contract.handler(convert_type(st))
+    ret = contract.handler(arg_as_dict(st))
     if ret is not None:
         sys.stdout.write(json.dumps(ret))
