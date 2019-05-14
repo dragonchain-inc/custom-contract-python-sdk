@@ -1,4 +1,3 @@
-
 """
     Dragonchain-inc
     Dragonchain custom smart contract in Python
@@ -10,7 +9,7 @@ import json
 
 def handler(payload):
     try:
-        j = json.loads(payload)['payload']
+        j = json.loads(payload)["payload"]
         calculator = Calculator(**j)
         method = calculator.method
         parameters = calculator.parameters
@@ -23,9 +22,10 @@ def handler(payload):
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "addition_ans": calculator.addition(parameters["numOne"], parameters["numTwo"]),
-                "tag": "addition"
-
+                "addition_ans": calculator.addition(
+                    parameters["numOne"], parameters["numTwo"]
+                ),
+                "tag": "addition",
             }
 
         if method == "subtraction":
@@ -35,15 +35,15 @@ def handler(payload):
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "subtraction_ans": calculator.subtraction(parameters["numOne"], parameters["numTwo"]),
-                "tag": "subtraction"
-
+                "subtraction_ans": calculator.subtraction(
+                    parameters["numOne"], parameters["numTwo"]
+                ),
+                "tag": "subtraction",
             }
 
         if method == "multiplication":
-            print(parameters['numOne'])
-            print(parameters['numTwo'])
-
+            print(parameters["numOne"])
+            print(parameters["numTwo"])
 
             # The blockchain expects a json data or response error
             return {
@@ -51,8 +51,10 @@ def handler(payload):
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "Ans": calculator.multiplication(parameters["numOne"], parameters["numTwo"]),
-                "tag": "multiplicaiton"
+                "Ans": calculator.multiplication(
+                    parameters["numOne"], parameters["numTwo"]
+                ),
+                "tag": "multiplicaiton",
             }
     except TypeError as e:
         return {"error": str(e)}
