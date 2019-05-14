@@ -15,14 +15,8 @@ def get_stdin():
     return buf
 
 
-def arg_as_dict(self):
-    v = ast.literal_eval(self)
-    if type(v) is not dict:
-        raise "Issues"
-    return v
-
 if __name__ == "__main__":
     st = get_stdin()
-    ret = contract.handler(arg_as_dict(st))
+    ret = contract.handler(st)
     if ret is not None:
         sys.stdout.write(json.dumps(ret))

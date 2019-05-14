@@ -1,24 +1,19 @@
+
 """
     Dragonchain-inc
     Dragonchain custom smart contract in Python
 """
-def addition(param):
-    # The value here will be stored on the blockchain
-    return int(param["numOne"]) + int(param["numTwo"])
 
-def subtraction(param):
-    # The value here will be stored on the blockchain
-    return int(param["numOne"]) - int(param["numTwo"])
-
-def multiplication(param):
-    # The value here will be stored on the blockchain
-    return int(param["numOne"]) * int(param["numTwo"])
+from .calculator import Calculator
+import json
 
 
 def handler(payload):
     try:
-        method = payload["method"]
-        parameters = payload["parameters"]
+        j = json.loads(payload)['payload']
+        calculator = Calculator(**j)
+        method = calculator.method
+        parameters = calculator.parameters
 
         # Check for the function you are trying to call.
         if method == "addition":
@@ -28,7 +23,7 @@ def handler(payload):
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "addition_ans": addition(parameters),
+                "addition_ans": calculator.addition(parameters["numOne"], parameters["numTwo"]),
                 "tag": "addition"
 
             }
@@ -40,19 +35,23 @@ def handler(payload):
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "subtraction_ans": subtraction(parameters),
+                "subtraction_ans": calculator.subtraction(parameters["numOne"], parameters["numTwo"]),
                 "tag": "subtraction"
 
             }
 
         if method == "multiplication":
+            print(parameters['numOne'])
+            print(parameters['numTwo'])
+
+
             # The blockchain expects a json data or response error
             return {
                 "Params": {
                     "numOne": parameters["numOne"],
                     "numTwo": parameters["numTwo"],
                 },
-                "Ans": multiplication(parameters),
+                "Ans": calculator.multiplication(parameters["numOne"], parameters["numTwo"]),
                 "tag": "multiplicaiton"
             }
     except TypeError as e:
