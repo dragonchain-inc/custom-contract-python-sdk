@@ -42,9 +42,6 @@ def handler(payload):
             }
 
         if method == "multiplication":
-            print(parameters["numOne"])
-            print(parameters["numTwo"])
-
             # The blockchain expects a json data or response error
             return {
                 "Params": {
