@@ -59,6 +59,13 @@ New payload:
 * Copy and paste the your keys below:
 
 ```py
+import json
+import dragonchain_sdk
+
+client = dragonchain_sdk.Client(dragonchain_id='your_dc_id', auth_key_id='your_auth_id', auth_key='your_auth_key', endpoint='your_dc_id.api.dragonchain.com')
+```
+
+```py
 response = dragonchain_client.post_contract(
     txn_type='calculator',
     image='taban/calculator_contract:<latest>',
