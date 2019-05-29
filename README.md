@@ -62,13 +62,13 @@ New payload:
 import json
 import dragonchain_sdk
 
-client = dragonchain_sdk.Client(dragonchain_id='your_dc_id', auth_key_id='your_auth_id', auth_key='your_auth_key', endpoint='your_dc_id.api.dragonchain.com')
+client = dragonchain_sdk.Client(dragonchain_id='your_dc_id', auth_key_id='your_auth_id', auth_key='your_auth_key', endpoint='https://your_dc_id.api.dragonchain.com')
 ```
 
 ```py
 response = dragonchain_client.post_contract(
     txn_type='calculator',
-    image='taban/calculator_contract:<latest>',
+    image='image_name',
     cmd='python',
     args=['-m', 'main'],
     execution_order='parallel',
@@ -100,8 +100,8 @@ print(dragonchain_client.create_transaction('example_contract', {
     'version': '1',
      "method": "multiplication",
      "parameters": {
-        "numOne": 200, 
-        "numTwo": 6
+        "numOne": 200,
+        "numTwo": 6,
         }
     }
 ))
