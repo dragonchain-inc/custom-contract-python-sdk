@@ -77,27 +77,26 @@ response = dragonchain_client.post_contract(
 )
 ```
 
-### Post a Smart contract
+### Create a Smart contract
 
 ```py
-print(dragonchain_client.post_contract(
-    txn_type='image_name',
+print(json.dumps(client.create_smart_contract(
+    transaction_type='contract_name',
     image='image_name',
-    cmd='python',
-    args=['-m', 'index'],
+    cmd='node',
+    args=['index.js'],
     execution_order='parallel',
-    # auth='<docker_auth_token_if_private_repository>'
-))
+    # registry_credentials='<docker_auth_token_if_private_repository>'
+)))
 ```
 
-
-### Post a Transaction
+### Create a Transaction
 
 Here is how to post transction to your calculator
 
 ```py
 
-print(dragonchain_client.post_transaction('example_contract', {
+print(dragonchain_client.create_transaction('example_contract', {
     'version': '1',
      "method": "multiplication",
      "parameters": {
@@ -126,7 +125,7 @@ $ python3 index.py
 You can verify your transaction by calling query_transaction function
 
 ```py
-print(dragonchain_client.query_transactions(query='your_transaction_id'))
+print(dragonchain_client.query_transactions(lucene_query='your_query'))
 ```
 
 #### Heap
@@ -150,7 +149,7 @@ Keys: Values and Ans
 
 ```py
 # Get single data from the heap
-heap = dragonchain_client.get_sc_heap("sc_name", str("multiplication")) # returns the answer value
+heap = dragonchain_client.get_smart_contract_object(key='transaction_or_smart_contract_name', smart_contract_id='multiplication') # returns the answer value
 
 ```
 
@@ -159,7 +158,7 @@ heap = dragonchain_client.get_sc_heap("sc_name", str("multiplication")) # return
 ```py
 # Register a transaction if you would like to just post transactions. Comment out post_custom_contract code
 # Custom indexes can be used to query the transaction.
-print(dragonchain_client.register_transaction_type('Your_Transaction_Name', custom_indexes=[{
+print(dragonchain_client.create_transaction_type(transaction_type='transaction_name', custom_indexes=[{
     'key': 'Unknown',
     'path': ''
 }]))
@@ -168,6 +167,6 @@ print(dragonchain_client.register_transaction_type('Your_Transaction_Name', cust
 ### Post to your new Transaction
 
 ```py
-print(dragonchain_client.post_transaction('Your_Transaction_Name', payload='I am awesome'))
+print(dragonchain_client.create_transaction(transaction_type='transaction_name', payload='I am awesome'))
 
 ```
